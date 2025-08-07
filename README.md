@@ -1,47 +1,35 @@
-# Zig Stylus
+**Zig File Descriptions**
 
-Zig Stylus is an Arbitrum Stylus SDK for the Zig programming language, designed for writing WebAssembly (WASM) smart contracts. It offers a concise and minimal syntax for those who prefer not to use Rust, providing an alternative for developing Zig smart contracts on the Arbitrum Stylus platform.
+account.zig
+Retrieves the balance of a given address and outputs it using WebAssembly allocator and host I/O functions.
 
-**Note: This library is still in development and not mature enough for production use.**
+build.zig
+Configures the build process for a WebAssembly executable, targeting wasm32-freestanding, linking C/C++ libraries, and setting up the user entrypoint.
 
-# Installation
+chainid.zig
+Fetches the blockchain chain ID using host I/O and outputs it as a 4-element u64 array.
 
-1. Install Cargo Stylus CLI:
+counter.zig
+Implements a persistent counter in storage, initializing it to 1 if unset, incrementing it otherwise, and outputting the current value.
 
-    ```bash
-    cargo install cargo-stylus
-    ```
+entrypoint.zig
+Defines a WebAssembly entrypoint that reads arguments, calls a user-defined main function, and outputs the result.
 
-2. Install Foundary Cast for calling deployed contracts:
+evmgas.zig
+Retrieves the remaining EVM gas and outputs it as a 4-element u64 array.
 
-    ```bash
-    curl -L https://foundry.paradigm.xyz | bash
-    ```
+main.zig
+Stores and retrieves a string ("ola") under a key ("hello123") in storage, then outputs the retrieved value.
 
-3. Clone the Repository
+sender.zig
+Emits a log event and outputs a 32-byte data array using host I/O functions.
 
-    ```bash
-    git clone https://github.com/Stylish-Stylus/zig-stylus.git
-    cd zig-stylus
-    ```
+storage.zig
+Stores and retrieves a string ("ola") under a key ("hello123") in storage, then outputs the retrieved value (similar to main.zig).
 
-4. Build your Contract
+WasmAllocator.zig
+Implements a custom WebAssembly memory allocator with size-classed memory management, supporting allocation, resizing, and freeing of memory blocks.
 
-    ```bash
-    zig build-lib ./src/main.zig -target wasm32-freestanding -dynamic --export=user_entrypoint -OReleaseSmall
-    ```
-5. Check Deployment Compatibility
-    
-    ```bash
-    cargo stylus check --wasm-file-path main.wasm
-    ```
-6. Deploy to Arbitrum Stylus
 
-    ```bash
-    cargo stylus deploy --wasm-file-path chainid.wasm --private-key <private-key>
-    ```
-7. Call Contract Entry Point
-
-    ```bash
-    ./cast call --rpc-url 'https://stylus-testnet.arbitrum.io/rpc' <contract-id> <input>
-    ```
+**Summary:**  
+Forked the zig-stylus repo, documented the what the files do
